@@ -86,6 +86,11 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public Integer deleteBatchUser(List<Integer> userIds) {
+        return this.userInfoMapper.deleteBatch(userIds);
+    }
+
 
     @Transactional(rollbackFor = Exception.class)
     @Override

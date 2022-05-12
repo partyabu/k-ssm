@@ -30,6 +30,14 @@
 
     </insert>
 
+    <delete id="deleteBatch">
+        delete from
+        tb_user_info
+        where user_id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </delete>
 
     <resultMap id="userInfoMap" type="com.abucloud.bo.UserInfoBO">
         <id column="user_id" property="userId"/>

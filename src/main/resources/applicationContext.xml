@@ -16,9 +16,9 @@
        http://www.springframework.org/schema/mvc
        https://www.springframework.org/schema/mvc/spring-mvc.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <!--只扫描Service相关注解-->
+    <!--排除Controller注解，扫描其他注解-->
     <context:component-scan base-package="com.abucloud">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
     <!--spring的事务管理-->
@@ -66,7 +66,7 @@
 
     </bean>
 
-    <!--3.递归发现映射器-->
+    <!--3.递归扫描映射器到ioc容器中-->
     <mybatis:scan base-package="com.abucloud.mapper"/>
 
 </beans>

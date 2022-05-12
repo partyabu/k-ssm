@@ -25,4 +25,6 @@ public interface UserService {
 
     void insertUser(List<TbUserInfo> userInfos, int batchSize);
 
+    Integer deleteBatchUser(List<Integer> userIds);
+
 }

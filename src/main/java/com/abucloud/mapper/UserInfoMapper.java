@@ -23,5 +23,7 @@ public interface UserInfoMapper {
 
     List<UserRoleBO> selectRoleByCondition(TbUserInfo userInfo);
 
-    void insertUser(TbUserInfo tbUserInfoList);
+    int insertUser(TbUserInfo tbUserInfoList);
+
+    Integer deleteBatch(List<Integer> userIds);
 }
