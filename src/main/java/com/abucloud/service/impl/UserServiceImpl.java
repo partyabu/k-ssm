@@ -1,12 +1,13 @@
 package com.abucloud.service.impl;
 
-import com.abucloud.bo.UserInfoBO;
 import com.abucloud.bo.UserRoleBO;
 import com.abucloud.entity.TbRoleInfo;
 import com.abucloud.entity.TbUserInfo;
 import com.abucloud.mapper.TbRoleInfoMapper;
 import com.abucloud.mapper.UserInfoMapper;
 import com.abucloud.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -38,8 +39,11 @@ public class UserServiceImpl implements UserService {
     private UserService userService;
 
     @Override
-    public List<UserInfoBO> selectList() {
-        return this.userInfoMapper.selectList();
+    public PageInfo<TbUserInfo> selectList() {
+       return PageHelper
+                .startPage(1, 10)
+                .doSelectPageInfo(() -> userInfoMapper.selectList());
+
     }
 
     @Override

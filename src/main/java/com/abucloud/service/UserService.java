@@ -1,8 +1,8 @@
 package com.abucloud.service;
 
-import com.abucloud.bo.UserInfoBO;
 import com.abucloud.bo.UserRoleBO;
 import com.abucloud.entity.TbUserInfo;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    List<UserInfoBO> selectList();
+    PageInfo selectList();
 
     TbUserInfo selectOne(Integer id);
 

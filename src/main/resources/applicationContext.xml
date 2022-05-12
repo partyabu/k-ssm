@@ -56,6 +56,14 @@
                 <property name="logImpl" value="org.apache.ibatis.logging.stdout.StdOutImpl"/>
             </bean>
         </property>
+
+        <!-- 分页插件 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor"/>
+            </array>
+        </property>
+
     </bean>
 
     <!--3.递归发现映射器-->
