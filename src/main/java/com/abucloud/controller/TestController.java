@@ -3,6 +3,7 @@ package com.abucloud.controller;
 import com.abucloud.dto.UserInfoDTO;
 import com.abucloud.service.UserService;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +19,7 @@ import java.util.List;
  * @Author party-abu
  * @Date 2022/5/11 19:14
  */
+@Slf4j
 @RequestMapping("one")
 @RestController
 public class TestController {
@@ -27,6 +29,7 @@ public class TestController {
 
     @GetMapping("isOk")
     public String testOk() {
+        log.info("ok..............");
         return "ok";
     }
 

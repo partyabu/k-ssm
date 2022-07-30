@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <!-- 日志存放路径，不要使用相对路径 -->
+    <property name="log.path" value="/home/abu/ssm/logs"/>
+
+    <!-- 日志输出格式，加上MDC链路追踪 -->
+    <property name="log.pattern"
+              value="%d{HH:mm:ss.SSS} [%X{traceId}] [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
+
+    <!--指定appender，appender要配合root和logger使用，否则没有意义-->
+    <!-- 1.控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--encoder表示对参数进行格式化，不推荐使用<layout>标签-->
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 2.滚动输出日志到debug文件 -->
+    <appender name="file_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--配置了file，则会将今天输出的日志放在活动文件中。可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值-->
+        <file>${log.path}/sys-debug.log</file>
+        <!-- 循环政策：基于时间创建日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--活动文件会根据fileNamePattern指定的值每隔一段时间改变一次变成归档文件-->
+            <fileNamePattern>${log.path}/sys-debug.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志保存最大周期（天数） -->
+            <maxHistory>30</maxHistory>
+            <!-- 最大日志量：在 1.1.6版本后才开始支持-->
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <!--对记录事件进行格式化:把日志信息转换成字节数组、把字节数组写入到输出流-->
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--ThresholdFilter会将指定level级别及其以上的都打印出来，LevelFilter可以指定拒绝和接受策略，进行日志隔离输出到不同的文件中-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>DEBUG</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 3.滚动输出日志到info文件 -->
+    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/sys-info.log</file>
+        <!-- 循环政策：基于时间创建日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件名格式 -->
+            <fileNamePattern>${log.path}/sys-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志保存最大周期（天数） -->
+            <maxHistory>30</maxHistory>
+            <!-- 最大日志量：在 1.1.6版本后才开始支持-->
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>INFO</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 4.滚动输出日志到error文件 -->
+    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/sys-error.log</file>
+        <!-- 循环政策：基于时间创建日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件名格式 -->
+            <fileNamePattern>${log.path}/sys-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志保存最大周期（天数） -->
+            <maxHistory>30</maxHistory>
+            <!-- 最大日志量：在 1.1.6版本后才开始支持-->
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>ERROR</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--指定根logger，默认是info模式-->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file_debug"/>
+        <appender-ref ref="file_info"/>
+        <appender-ref ref="file_error"/>
+    </root>
+
+    <!-- logger用于指定系统模块某个包或者类，并将指定级别下的日志传递给root Logger处理。additivity表示是否将日志传递给root，默认是true-->
+    <!--如果配置包，则表示当前包及其子包下面的类中所有使用到的Logger都是使用这个配置的logger，
+    比如下面第一，都会将INFO及其以上级别的日志传递给root进行处理-->
+    <logger name="com/abucloud" level="INFO" additivity="true"/>
+    <!--由于mybatis日志配置中没有logback配置选项，只能单独使用Logger组件进行配置。这里的name是mapper映射接口下所在的包。
+    level必须是debug模式下【原因：BaseExecutor.getConnection方法中会判断是否已开启了debug模式】 -->
+    <logger name="com/abucloud/mapper" level="DEBUG"/>
+
+    <!-- 下面配置一些第三方包的日志过滤级别，用于避免刷屏 -->
+    <logger name="org.springframework" level="warn"/>
+    <logger name="org.mybatis" level="INFO"/>
+    <logger name="org.apache" level="WARN"/>
+
+</configuration>
