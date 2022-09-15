@@ -1,5 +1,6 @@
 package com.abucloud.service;
 
+import com.abucloud.bo.UserInfoBO;
 import com.abucloud.bo.UserRoleBO;
 import com.abucloud.entity.TbUserInfo;
 import com.github.pagehelper.PageInfo;
@@ -26,5 +27,7 @@ public interface UserService {
     void insertUser(List<TbUserInfo> userInfos, int batchSize);
 
     Integer deleteBatchUser(List<Integer> userIds);
+
+    TbUserInfo queryPage(UserInfoBO userInfoBO);
 
 }

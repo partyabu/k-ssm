@@ -1,6 +1,7 @@
 package com.abucloud.mapper;
 
 
+import com.abucloud.bo.PageRequest;
 import com.abucloud.bo.UserInfoBO;
 import com.abucloud.bo.UserRoleBO;
 import com.abucloud.entity.TbUserInfo;
@@ -26,4 +27,7 @@ public interface UserInfoMapper {
     int insertUser(TbUserInfo tbUserInfoList);
 
     Integer deleteBatch(List<Integer> userIds);
+
+    TbUserInfo selectPage(PageRequest pageRequest);
+
 }

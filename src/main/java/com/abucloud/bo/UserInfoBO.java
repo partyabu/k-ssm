@@ -3,6 +3,7 @@ package com.abucloud.bo;
 
 import com.abucloud.entity.TbUserInfo;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -11,8 +12,9 @@ import java.util.List;
  * @Author party-abu
  * @Date 2022/3/23 21:59
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class UserInfoBO {
+public class UserInfoBO extends PageRequest{
 
     private Integer userId;
 

@@ -1,16 +1,15 @@
 package com.abucloud.controller;
 
+import com.abucloud.bo.UserInfoBO;
 import com.abucloud.dto.UserInfoDTO;
+import com.abucloud.entity.TbUserInfo;
 import com.abucloud.service.UserService;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -88,4 +87,16 @@ public class TestController {
         System.out.println(stringBuilder.toString());
         return this.userService.selectList();
     }
+
+    /**
+     * 分页查询
+     *
+     * @param userInfoBO
+     * @return
+     */
+    @PostMapping("queryPage")
+    public TbUserInfo queryPage(@RequestBody UserInfoBO userInfoBO) {
+        return this.userService.queryPage(userInfoBO);
+    }
+
 }

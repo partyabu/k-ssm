@@ -1,5 +1,6 @@
 package com.abucloud.service.impl;
 
+import com.abucloud.bo.UserInfoBO;
 import com.abucloud.bo.UserRoleBO;
 import com.abucloud.entity.TbRoleInfo;
 import com.abucloud.entity.TbUserInfo;
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PageInfo<TbUserInfo> selectList() {
-       return PageHelper
+        return PageHelper
                 .startPage(1, 10)
                 .doSelectPageInfo(() -> userInfoMapper.selectList());
 
@@ -89,6 +90,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer deleteBatchUser(List<Integer> userIds) {
         return this.userInfoMapper.deleteBatch(userIds);
+    }
+
+    @Override
+    public TbUserInfo queryPage(UserInfoBO userInfoBO) {
+        return this.userInfoMapper.selectPage(userInfoBO);
     }
 
 
