@@ -25,10 +25,10 @@ public class KTest {
     private UserService userService;
 
 
-    @Test
+  /*  @Test
     public void test01() {
         this.userService.selectList();
-    }
+    }*/
 
     @Test
     public void test03() {

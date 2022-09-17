@@ -1,14 +1,10 @@
 package com.abucloud.controller;
 
 import com.abucloud.bo.UserInfoBO;
-import com.abucloud.dto.UserInfoDTO;
 import com.abucloud.entity.TbUserInfo;
 import com.abucloud.service.UserService;
-import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,11 +28,11 @@ public class TestController {
         return "ok";
     }
 
-    @GetMapping("users")
+  /*  @GetMapping("users")
     public PageInfo users() {
         return this.userService.selectList();
     }
-
+*/
     /**
      * 数据校验以及分页
      *
@@ -44,6 +40,7 @@ public class TestController {
      * @param bindingResult
      * @return
      */
+/*
     @GetMapping("testValidate")
     public PageInfo users(@RequestBody @Validated UserInfoDTO userInfoDTO, BindingResult bindingResult) {
 
@@ -56,6 +53,7 @@ public class TestController {
         System.out.println(stringBuilder.toString());
         return this.userService.selectList();
     }
+*/
 
     /**
      * 批量删除
@@ -75,7 +73,7 @@ public class TestController {
      * @param bindingResult
      * @return
      */
-    @GetMapping("testValidate02")
+/*    @GetMapping("testValidate02")
     public PageInfo testValidate02(@RequestBody @Validated UserInfoDTO userInfoDTO, BindingResult bindingResult) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -86,7 +84,7 @@ public class TestController {
         });
         System.out.println(stringBuilder.toString());
         return this.userService.selectList();
-    }
+    }*/
 
     /**
      * 分页查询: 物理分页

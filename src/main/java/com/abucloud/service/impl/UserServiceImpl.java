@@ -7,8 +7,6 @@ import com.abucloud.entity.TbUserInfo;
 import com.abucloud.mapper.TbRoleInfoMapper;
 import com.abucloud.mapper.UserInfoMapper;
 import com.abucloud.service.UserService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -40,13 +38,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserService userService;
 
-    @Override
+/*    @Override
     public PageInfo<TbUserInfo> selectList() {
         return PageHelper
                 .startPage(1, 10)
                 .doSelectPageInfo(() -> userInfoMapper.selectList());
 
-    }
+    }*/
 
     @Override
     public TbUserInfo selectOne(Integer id) {
