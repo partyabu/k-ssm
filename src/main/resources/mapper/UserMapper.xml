@@ -76,9 +76,26 @@
         </where>
     </select>
 
-    <select id="selectPage" resultType="com.abucloud.entity.TbUserInfo">
+    <select id="queryPagePhysics" resultType="com.abucloud.entity.TbUserInfo">
         SELECT user_id userId
         FROM tb_user_info
         LIMIT #{offset},#{pageSize}
+    </select>
+
+    <select id="queryPageLogic" resultType="com.abucloud.entity.TbUserInfo">
+        SELECT user_id userId,open_Id,login_account
+        FROM tb_user_info
+        <where>
+            <if test="userId != null">
+                <choose>
+                    <when test="loginAccount != null and loginAccount != ''">
+                        login_account = #{loginAccount}
+                    </when>
+                    <otherwise>
+                        AND user_id = #{userId}
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
     </select>
 </mapper>

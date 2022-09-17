@@ -28,6 +28,7 @@ public interface UserService {
 
     Integer deleteBatchUser(List<Integer> userIds);
 
-    TbUserInfo queryPage(UserInfoBO userInfoBO);
+    List<TbUserInfo> queryPagePhysics(UserInfoBO userInfoBO);
 
+    List<TbUserInfo> queryPageLogic(UserInfoBO userInfoBO);
 }

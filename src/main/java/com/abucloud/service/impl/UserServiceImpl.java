@@ -10,6 +10,7 @@ import com.abucloud.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,8 +94,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public TbUserInfo queryPage(UserInfoBO userInfoBO) {
-        return this.userInfoMapper.selectPage(userInfoBO);
+    public List<TbUserInfo> queryPagePhysics(UserInfoBO userInfoBO) {
+        return this.userInfoMapper.queryPagePhysics(userInfoBO);
+    }
+
+    @Override
+    public List<TbUserInfo> queryPageLogic(UserInfoBO userInfoBO) {
+
+        Integer offset = userInfoBO.getOffset();
+        Integer pageSize = userInfoBO.getPageSize();
+        // mapper接口中添加RowBounds对象表示逻辑分页（查询全部，然后根据offset和pageSize分页）
+        return this.userInfoMapper.queryPageLogic(userInfoBO, new RowBounds(offset, pageSize));
+
     }
 
 

@@ -89,14 +89,25 @@ public class TestController {
     }
 
     /**
-     * 分页查询
+     * 分页查询: 物理分页
      *
      * @param userInfoBO
      * @return
      */
-    @PostMapping("queryPage")
-    public TbUserInfo queryPage(@RequestBody UserInfoBO userInfoBO) {
-        return this.userService.queryPage(userInfoBO);
+    @PostMapping("queryPagePhysics")
+    public List<TbUserInfo> queryPagePhysics(@RequestBody UserInfoBO userInfoBO) {
+        return this.userService.queryPagePhysics(userInfoBO);
+    }
+
+    /**
+     * 分页查询: 逻辑分页
+     *
+     * @param userInfoBO
+     * @return
+     */
+    @PostMapping("queryPageLogic")
+    public List<TbUserInfo> queryPage(@RequestBody UserInfoBO userInfoBO) {
+        return this.userService.queryPageLogic(userInfoBO);
     }
 
 }

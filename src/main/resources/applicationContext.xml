@@ -58,11 +58,11 @@
         </property>
 
         <!-- 分页插件 -->
-        <property name="plugins">
+      <!--  <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageInterceptor"/>
             </array>
-        </property>
+        </property>-->
 
     </bean>
 

@@ -18,5 +18,7 @@ public class UserInfoBO extends PageRequest{
 
     private Integer userId;
 
+    private String loginAccount;
+
     private List<TbUserInfo> loginAccountList;
 }
