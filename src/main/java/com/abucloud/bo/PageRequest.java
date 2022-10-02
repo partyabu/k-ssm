@@ -28,7 +28,7 @@ public class PageRequest implements Serializable {
      * 偏移量，mybatis #{offset}调用的是getOffset方法
      */
     public Integer getOffset() {
-        return (pageNo == null || pageNo < 1 ? 1 : pageNo)
+        return (pageNo == null || pageNo < 0 ? 0 : pageNo)
                 * (pageSize == null ? 10 : pageSize);
     }
 

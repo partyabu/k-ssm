@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -106,6 +108,17 @@ public class TestController {
     @PostMapping("queryPageLogic")
     public List<TbUserInfo> queryPage(@RequestBody UserInfoBO userInfoBO) {
         return this.userService.queryPageLogic(userInfoBO);
+    }
+
+
+    private static Map<String, String> map = new HashMap<>();
+
+    @RequestMapping("/oom")
+    public String oom() throws Exception {
+        for (int i = 0; i < 100000; i++) {
+            map.put("key" + i, "value" + i);
+        }
+        return "oom";
     }
 
 }
