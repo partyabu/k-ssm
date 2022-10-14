@@ -25,10 +25,11 @@ public class PageRequest implements Serializable {
     private Integer pageSize;
 
     /**
-     * 偏移量，mybatis #{offset}调用的是getOffset方法
+     * 偏移量计算方式：(pageNo - 1) * pageSize。
+     * mybatis #{offset}调用的是getOffset方法
      */
     public Integer getOffset() {
-        return (pageNo == null || pageNo < 0 ? 0 : pageNo)
+        return ((pageNo == null || pageNo < 1 ? 1 : pageNo) - 1)
                 * (pageSize == null ? 10 : pageSize);
     }
 
