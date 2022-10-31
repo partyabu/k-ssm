@@ -74,6 +74,8 @@ public class UserServiceImpl implements UserService {
                 // 每到batchSize执行一次，当count等于集合总数时执行
                 if (count % batchSize == 0 || count == totalSize) {
                     sqlSession.commit();
+                    // 清理缓存，防止内存溢出
+                    sqlSession.clearCache();
                 }
 
                 count++;
