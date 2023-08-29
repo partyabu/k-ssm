@@ -49,6 +49,23 @@ public class KTest {
             tbUserInfo.setUpdateCount(0);
             userInfoList.add(tbUserInfo);
         }
-        this.userService.insertUser(userInfoList,10);
+        this.userService.insertUser(userInfoList, 10);
+    }
+
+    /**
+     * 分批次查询
+     */
+    @Test
+    public void selectBatch() {
+        // 查询总条数
+        int totalCount = 10000;
+        // 每次查询条数
+        int queryBatchCount = 1000;
+        // 已经查询的条数
+        int passCount = 0;
+        do {
+            System.out.println("select * from a limit " + passCount + "," + queryBatchCount);
+            passCount = queryBatchCount + passCount;
+        } while (passCount <= totalCount);
     }
 }
