@@ -25,9 +25,9 @@
     </insert>
 
     <delete id="deleteBatch">
-        delete
-        from tb_user_info
-        where user_id in
+        DELETE
+        FROM tb_user_info
+        WHERE user_id IN
         <foreach collection="list" item="item" separator="," open="(" close=")">
             #{item}
         </foreach>
@@ -83,7 +83,7 @@
     </select>
 
     <select id="queryPageLogic" resultType="com.abucloud.entity.TbUserInfo">
-        SELECT user_id userId,open_Id,login_account
+        SELECT user_id userId, open_Id, login_account
         FROM tb_user_info
         <where>
             <if test="userId != null">
@@ -98,4 +98,39 @@
             </if>
         </where>
     </select>
+
+    <insert id="insertBatch">
+        INSERT INTO `tb_user_info`(`login_account`, `password`, `username`, `dept_id`, `data_status`, `create_by`,
+                                   `create_time`,
+                                   `update_by`, `update_time`, `record_version`, `update_count`)
+        VALUES
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.loginAccount},
+             #{entity.password},
+             #{entity.username},
+             #{entity.deptId},
+             #{entity.dataStatus},
+             #{entity.createBy},
+             #{entity.createTime},
+             #{entity.updateBy},
+             #{entity.updateTime},
+             #{entity.recordVersion},
+             #{entity.updateCount})
+        </foreach>
+    </insert>
+
+    <update id="updateBatch">
+        <foreach collection="userInfoList" item="item" separator=";">
+            UPDATE tb_user_info
+            <set>
+                <if test="item.loginAccount != null and item.loginAccount != ''">
+                    login_account = #{item.loginAccount},
+                </if>
+                <if test="item.dataStatus != null and item.dataStatus != ''">
+                    login_account = #{item.dataStatus},
+                </if>
+            </set>
+            WHERE user_id = #{item.userId}
+        </foreach>
+    </update>
 </mapper>
