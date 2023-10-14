@@ -30,33 +30,6 @@ public class TestController {
         return "ok";
     }
 
-  /*  @GetMapping("users")
-    public PageInfo users() {
-        return this.userService.selectList();
-    }
-*/
-    /**
-     * 数据校验以及分页
-     *
-     * @param userInfoDTO
-     * @param bindingResult
-     * @return
-     */
-/*
-    @GetMapping("testValidate")
-    public PageInfo users(@RequestBody @Validated UserInfoDTO userInfoDTO, BindingResult bindingResult) {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        bindingResult.getFieldErrors().forEach(fieldError -> {
-            String field = fieldError.getField();
-            String defaultMessage = fieldError.getDefaultMessage();
-            stringBuilder.append(field).append(":").append(defaultMessage);
-        });
-        System.out.println(stringBuilder.toString());
-        return this.userService.selectList();
-    }
-*/
-
     /**
      * 批量删除
      *
@@ -67,26 +40,6 @@ public class TestController {
     public Integer deleteBatchUser(@RequestBody List<Integer> userIds) {
         return this.userService.deleteBatchUser(userIds);
     }
-
-    /**
-     * 数据校验以及分页
-     *
-     * @param userInfoDTO
-     * @param bindingResult
-     * @return
-     */
-/*    @GetMapping("testValidate02")
-    public PageInfo testValidate02(@RequestBody @Validated UserInfoDTO userInfoDTO, BindingResult bindingResult) {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        bindingResult.getFieldErrors().forEach(fieldError -> {
-            String field = fieldError.getField();
-            String defaultMessage = fieldError.getDefaultMessage();
-            stringBuilder.append(field).append(":").append(defaultMessage);
-        });
-        System.out.println(stringBuilder.toString());
-        return this.userService.selectList();
-    }*/
 
     /**
      * 分页查询: 物理分页
