@@ -3,6 +3,7 @@ package com.abucloud;
 import com.abucloud.entity.TbUserInfo;
 import com.abucloud.mapper.UserInfoMapper;
 import com.abucloud.service.UserService;
+import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,7 @@ public class KTest {
     public void insertBatch() {
 
         List<TbUserInfo> userInfoList = new ArrayList<>(10);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             TbUserInfo tbUserInfo = new TbUserInfo();
             tbUserInfo.setLoginAccount("1" + i);
             tbUserInfo.setPassword("1");
@@ -95,7 +96,10 @@ public class KTest {
             tbUserInfo.setUpdateCount(0);
             userInfoList.add(tbUserInfo);
         }
-        this.userInfoMapper.insertBatch(userInfoList);
+        List<List<TbUserInfo>> partition = Lists.partition(userInfoList, 10);
+        partition.forEach(tbUserInfos -> {
+            this.userInfoMapper.insertBatch(userInfoList);
+        });
     }
 
     /**

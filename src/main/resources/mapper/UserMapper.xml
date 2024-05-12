@@ -104,7 +104,7 @@
                                    `create_time`,
                                    `update_by`, `update_time`, `record_version`, `update_count`)
         VALUES
-        <foreach collection="entities" item="entity" separator=",">
+        <foreach collection="list" item="entity" separator=",">
             (#{entity.loginAccount},
              #{entity.password},
              #{entity.username},
@@ -120,7 +120,7 @@
     </insert>
 
     <update id="updateBatch">
-        <foreach collection="userInfoList" item="item" separator=";">
+        <foreach collection="list" item="item" separator=";">
             UPDATE tb_user_info
             <set>
                 <if test="item.loginAccount != null and item.loginAccount != ''">
