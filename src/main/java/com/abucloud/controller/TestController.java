@@ -30,6 +30,11 @@ public class TestController {
         return "ok";
     }
 
+    @GetMapping("userInfo")
+    public TbUserInfo user(@RequestParam("userId") Integer userId) {
+        return this.userService.selectOne(userId);
+    }
+
     /**
      * 批量删除
      *
