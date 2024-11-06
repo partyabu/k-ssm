@@ -29,6 +29,11 @@
     <!-- 步骤二：开启spring对事务注解的支持 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+    <!--添加TransactionTemplate-->
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
 
     <!--整合mybatis-->
 
@@ -66,7 +71,20 @@
 
     </bean>
 
+    <bean id="tbRoleInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.abucloud.mapper.TbRoleInfoMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="userInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.abucloud.mapper.UserInfoMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.mybatis.spring.sample.mapper" />
+    </bean>
+
     <!--3.递归扫描映射器到ioc容器中-->
-    <mybatis:scan base-package="com.abucloud.mapper"/>
+    <!--<mybatis:scan base-package="com.abucloud.mapper"/>-->
 
 </beans>
