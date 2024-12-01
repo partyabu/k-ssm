@@ -34,12 +34,12 @@ public class KTest {
     @Test
     public void test01() {
 
-        // transactionTemplate.executeWithoutResult(t -> {
+        transactionTemplate.executeWithoutResult(t -> {
 
             this.userService.selectOne("aaaaaa");
             System.out.println("1111111111");
             this.userService.selectOne("aaaaaa");
-        // });
+        });
 
     }
 
