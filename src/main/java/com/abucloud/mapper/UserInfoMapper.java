@@ -5,6 +5,7 @@ import com.abucloud.bo.PageRequest;
 import com.abucloud.bo.UserInfoBO;
 import com.abucloud.bo.UserRoleBO;
 import com.abucloud.entity.TbUserInfo;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -21,13 +22,13 @@ public interface UserInfoMapper {
 
     List<UserInfoBO> selectList();
 
-    TbUserInfo selectOne(Integer id);
+    TbUserInfo selectOne(String id);
 
     List<UserRoleBO> selectRoleByCondition(TbUserInfo userInfo);
 
     int insertUser(TbUserInfo tbUserInfoList);
 
-    Integer deleteBatch(List<Integer> userIds);
+    Integer deleteBatch(@Param("datas") List<Integer> userIds);
 
     List<TbUserInfo> queryPagePhysics(PageRequest pageRequest);
 

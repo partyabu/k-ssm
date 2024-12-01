@@ -15,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }*/
 
     @Override
-    public TbUserInfo selectOne(Integer id) {
+    public TbUserInfo selectOne(String id) {
         return this.userInfoMapper.selectOne(id);
     }
 
@@ -93,9 +94,13 @@ public class UserServiceImpl implements UserService {
         return this.userInfoMapper.deleteBatch(userIds);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public List<TbUserInfo> queryPagePhysics(UserInfoBO userInfoBO) {
-        return this.userInfoMapper.queryPagePhysics(userInfoBO);
+
+        this.userService.deleteBatchUser(Arrays.asList(7));
+        int a = 1/0;
+        return Collections.emptyList();
     }
 
     @Override
@@ -125,20 +130,20 @@ public class UserServiceImpl implements UserService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void insertOneUser() {
-        TbUserInfo tbUserInfo = new TbUserInfo();
-        tbUserInfo.setLoginAccount("1");
-        tbUserInfo.setPassword("1");
-        tbUserInfo.setUsername("1");
-        tbUserInfo.setDeptId(0);
-        tbUserInfo.setDataStatus("1");
-        tbUserInfo.setCreateBy("1");
-        tbUserInfo.setCreateTime(LocalDateTime.now());
-        tbUserInfo.setUpdateBy("1");
-        tbUserInfo.setUpdateTime(LocalDateTime.now());
-        tbUserInfo.setRecordVersion(0);
-        tbUserInfo.setUpdateCount(0);
-        this.userInfoMapper.insertUser(tbUserInfo);
-        // int a = 1 / 0;
+        // TbUserInfo tbUserInfo = new TbUserInfo();
+        // tbUserInfo.setLoginAccount("1");
+        // tbUserInfo.setPassword("1");
+        // tbUserInfo.setUsername("1");
+        // tbUserInfo.setDeptId(0);
+        // tbUserInfo.setDataStatus("1");
+        // tbUserInfo.setCreateBy("1");
+        // tbUserInfo.setCreateTime(LocalDateTime.now());
+        // tbUserInfo.setUpdateBy("1");
+        // tbUserInfo.setUpdateTime(LocalDateTime.now());
+        // tbUserInfo.setRecordVersion(0);
+        // tbUserInfo.setUpdateCount(0);
+        // this.userInfoMapper.insertUser(tbUserInfo);
+        // // int a = 1 / 0;
 
     }
 }

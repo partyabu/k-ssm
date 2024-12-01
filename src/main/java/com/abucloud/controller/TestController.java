@@ -36,7 +36,7 @@ public class TestController {
      * @param userIds
      * @return
      */
-    @GetMapping("deleteBatch")
+    @PostMapping("deleteBatch")
     public Integer deleteBatchUser(@RequestBody List<Integer> userIds) {
         return this.userService.deleteBatchUser(userIds);
     }

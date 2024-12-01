@@ -46,6 +46,9 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
+    <bean id="myBeanGet" class="com.abucloud.config.MyBeanGet"/>
+    <bean id="myFactoryBean" class="com.abucloud.config.MyFactoryBean"/>
+
     <!--2.Mybatis相关配置-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>

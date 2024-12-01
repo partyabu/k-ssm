@@ -2,6 +2,7 @@ package com.abucloud.bo;
 
 import lombok.Data;
 
+import javax.annotation.PostConstruct;
 import java.io.Serializable;
 
 /**
@@ -36,6 +37,11 @@ public class PageRequest implements Serializable {
 
     public Integer getPageSize() {
         return pageSize == null ? 10 : pageSize;
+    }
+
+    @PostConstruct
+    public void test01(){
+        System.out.println("userId = " + 11111);
     }
 
 }

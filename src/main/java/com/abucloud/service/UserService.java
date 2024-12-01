@@ -15,7 +15,7 @@ public interface UserService {
 
     // PageInfo selectList();
 
-    TbUserInfo selectOne(Integer id);
+    TbUserInfo selectOne(String id);
 
     List<UserRoleBO> selectRoleByCondition(TbUserInfo userInfo);
 
