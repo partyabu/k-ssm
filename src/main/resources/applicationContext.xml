@@ -48,6 +48,10 @@
 
     <bean id="myBeanGet" class="com.abucloud.config.MyBeanGet"/>
     <bean id="myFactoryBean" class="com.abucloud.config.MyFactoryBean"/>
+    <bean id="aspectLog" class="com.abucloud.config.AspectLog"/>
+    <bean id="personBean" class="com.abucloud.config.PersonBean">
+        <property name="name" value="张三"/>
+    </bean>
 
     <!--2.Mybatis相关配置-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

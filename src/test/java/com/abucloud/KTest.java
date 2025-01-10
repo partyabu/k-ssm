@@ -1,5 +1,6 @@
 package com.abucloud;
 
+import com.abucloud.config.PersonBean;
 import com.abucloud.entity.TbUserInfo;
 import com.abucloud.service.UserService;
 import org.junit.Test;
@@ -8,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import java.util.Arrays;
 
 /**
  * @Description:
@@ -82,12 +81,11 @@ public class KTest {
         System.out.println("tbUserInfo = " + o);
     }
 
+    @Autowired
+    private PersonBean personBean;
+
     @Test
     public void test05() {
-        int nums[] = new int[]{
-                1, 2, 2, 4
-        };
-
-        System.out.println("Arrays.toString(nums) = " + Arrays.toString(nums));
+      this.personBean.work();;
     }
 }
