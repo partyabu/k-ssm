@@ -24,7 +24,7 @@
     <!--spring的事务管理-->
     <!--步骤一：事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <constructor-arg ref="dataSource"/>
+        <constructor-arg ref="hikariDataSource"/>
     </bean>
     <!-- 步骤二：开启spring对事务注解的支持 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -39,7 +39,7 @@
 
     <!--1.配置连接池-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
-    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+    <bean id="hikariDataSource" class="com.zaxxer.hikari.HikariDataSource">
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="username" value="${jdbc.username}"/>
@@ -55,7 +55,7 @@
 
     <!--2.Mybatis相关配置-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="hikariDataSource"/>
         <!--映射配置文件位置-->
         <property name="mapperLocations" value="classpath:/mapper/*.xml"/>
 
@@ -78,18 +78,18 @@
 
     </bean>
 
-    <bean id="tbRoleInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.abucloud.mapper.TbRoleInfoMapper"/>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-    </bean>
-    <bean id="userInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.abucloud.mapper.UserInfoMapper"/>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-    </bean>
+    <!--<bean id="tbRoleInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+    <!--    <property name="mapperInterface" value="com.abucloud.mapper.TbRoleInfoMapper"/>-->
+    <!--    <property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+    <!--<bean id="userInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+    <!--    <property name="mapperInterface" value="com.abucloud.mapper.UserInfoMapper"/>-->
+    <!--    <property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
 
     <!--递归扫描指定包下的映射器接口，使用注解、<mybatis:scan>、MapperScannerConfigurer都可以-->
     <!--3.递归扫描映射器到ioc容器中-->
-    <!--<mybatis:scan base-package="com.abucloud.mapper"/>-->
+    <mybatis:scan base-package="com.abucloud.mapper"/>
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
