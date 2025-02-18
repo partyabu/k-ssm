@@ -1,6 +1,9 @@
 package com.abucloud.mapper;
 
 import com.abucloud.entity.TbRoleInfo;
+import com.abucloud.entity.TbUserInfo;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -13,4 +16,10 @@ public interface TbRoleInfoMapper {
      * @param tbRoleInfo
      */
     void insertOneUser(TbRoleInfo tbRoleInfo);
+
+    /**
+     * com/abucloud/mapper/TbRoleInfoMapper.xml
+     * @param tbRoleInfoList
+     */
+    int updateBatch(List<TbUserInfo> tbRoleInfoList);
 }

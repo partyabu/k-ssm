@@ -2,6 +2,7 @@ package com.abucloud;
 
 import com.abucloud.config.PersonBean;
 import com.abucloud.entity.TbUserInfo;
+import com.abucloud.mapper.TbRoleInfoMapper;
 import com.abucloud.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.support.TransactionTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description:
@@ -28,6 +32,9 @@ public class KTest {
 
     @Autowired
     private TransactionTemplate transactionTemplate;
+
+    @Autowired
+    private TbRoleInfoMapper tbRoleInfoMapper;
 
 
     @Test
@@ -87,5 +94,24 @@ public class KTest {
     @Test
     public void test05() {
       this.personBean.work();;
+    }
+
+    @Test
+    public void test07() {
+
+        List<TbUserInfo> tbRoleInfoList = new ArrayList<>();
+        TbUserInfo tbRoleInfo = new TbUserInfo();
+        tbRoleInfo.setLoginAccount("0111");
+        tbRoleInfo.setUsername("张三0111");
+
+        TbUserInfo tbRoleInfo2 = new TbUserInfo();
+        tbRoleInfo2.setLoginAccount("admin01");
+        tbRoleInfo2.setUsername("admin01");
+
+        tbRoleInfoList.add(tbRoleInfo2);
+        tbRoleInfoList.add(tbRoleInfo);
+
+        int updateBatchRow = this.tbRoleInfoMapper.updateBatch(tbRoleInfoList);
+        System.out.println("updateBatchRow = " + updateBatchRow);
     }
 }

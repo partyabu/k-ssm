@@ -11,5 +11,14 @@
         (#{roleName}, #{roleDesc});
     </insert>
 
-
+    <update id="updateBatch">
+        <foreach collection="list" item="s" separator=";">
+            update
+            tb_user_info
+            set
+            `username` = #{s.username}
+            where
+            login_account = #{s.loginAccount}
+        </foreach>
+    </update>
 </mapper>
